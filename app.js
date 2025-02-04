@@ -3,6 +3,12 @@ const Controller = require("./Controllers/Controllers");
 
 const app = express();
 app.use(express.json());
+app.use((req, res, next) => {
+  req.requestTime = new Date().toLocaleString();
+  next();
+}
+);
+
 
 app.route("/api/v1/phones").get(Controller.getAllPhones);
 app.route("/api/v1/new-phone").post(Controller.createPhone);

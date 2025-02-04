@@ -8,6 +8,7 @@ const allPhones = JSON.parse(
 const getAllPhones = (req, res) => {
   res.status(200).json({
     status: "success",
+    requestedAt: req.requestTime,
     count: allPhones.length,
     data: {
       phones: allPhones,
@@ -21,11 +22,13 @@ const getPhone = (req, res) => {
   if (!phone) {
     return res.status(404).json({
       status: "fail",
+      requestedAt: req.requestTime,
       message: `Invalid ID, Id must be less than ${allPhones.length}`,
     });
   }
   res.status(200).json({
     status: "success",
+    requestedAt: req.requestTime,
     data: {
       phone,
     },
@@ -42,6 +45,7 @@ const createPhone = (req, res) => {
     (err) => {
       res.status(201).json({
         status: "success",
+        requestedAt: req.requestTime,
         data: {
           phone: newPhone,
         },
@@ -56,6 +60,7 @@ const updatePhone = (req, res) => {
   if (!phone) {
     return res.status(404).json({
       status: "fail",
+      requestedAt: req.requestTime,
       message: "Invalid ID",
     });
   }
@@ -66,6 +71,7 @@ const updatePhone = (req, res) => {
     (err) => {
       res.status(201).json({
         status: "success",
+        requestedAt: req.requestTime,
         data: {
           phone: updatedPhone,
         },
@@ -80,6 +86,7 @@ const deletePhone = (req, res) => {
   if (!phone) {
     return res.status(404).json({
       status: "fail",
+      requestedAt: req.requestTime,
       message: "Invalid ID",
     });
   }
@@ -91,6 +98,7 @@ const deletePhone = (req, res) => {
     (err) => {
       res.status(204).json({
         status: "success",
+        requestedAt: req.requestTime,
         data: null,
       });
     }
