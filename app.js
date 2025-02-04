@@ -24,7 +24,7 @@ app.get("/api/v1/get-phone/:id", (req, res) => {
   if (!phone) {
     return res.status(404).json({
       status: "fail",
-      message: "Invalid ID",
+      message: `Invalid ID, Id must be less than ${allPhones.length}`,
     });
   }
   res.status(200).json({
